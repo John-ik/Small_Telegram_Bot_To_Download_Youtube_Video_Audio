@@ -1,3 +1,5 @@
+from mp3_metadata_setter import set_mp3_image
+
 import yt_dlp
 import asyncio
 import os
@@ -18,6 +20,8 @@ async def download_video(url):
 async def download_audio(url):
     ydl_opts = {
         'format': 'mp3/bestaudio/best',
+        'writethumbnail': True,
+        'outtmpl': 'music/%(title)s.%(ext)s',
         'quiet': True,
         # ℹ️ See help(yt_dlp.postprocessor) for a list of available Postprocessors and their arguments
         'postprocessors': [{  # Extract audio using ffmpeg
@@ -30,6 +34,8 @@ async def download_audio(url):
         info_dict = ydl.extract_info(url, download=False)
         ydl.process_info(info_dict)
         audio_file = ydl.prepare_filename(info_dict)
+    set_mp3_image(audio_file)
+
     return audio_file
 
 

@@ -59,9 +59,12 @@ async def bot_download_audio(message: types.Message):
     try:
         audio_file = await download_audio(message.text)
         print(audio_file)
+        thumb_file = ".".join(audio_file.split(".")[:-1]) + ".png"
         with open(audio_file, "rb") as file:
-            await message.reply_audio(file, reply=False, title=" ".join(audio_file.split("_")))
+            with open(thumb_file, "rb") as thumb_f:
+                await message.reply_audio(file, reply=False, title=(" ".join(audio_file.split("_"))).split("/")[-1], thumb=thumb_f)
         os.remove(audio_file)
+        os.remove(thumb_file)
     except:
         await msg.edit_text("Проверьте введёную ссылку")
 
