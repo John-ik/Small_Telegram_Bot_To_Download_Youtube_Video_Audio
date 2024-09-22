@@ -22,7 +22,7 @@ async def start_command(message: types.Message):
     await message.reply("Перед отправлением ссылки выберите:\n"
                         "Скачать видео: /video\n"
                         "Скачать аудио из видео: /audio\n"
-                        "[GitHub проекта](https://github.com/Ifanfomin/Small-Telegram-Bot-To-Download-Youtube-Video-Aoudio)",
+                        "[GitHub проекта](https://github.com/Ifanfomin/Small_Telegram_Bot_To_Download_Youtube_Video_Audio)",
                         reply_markup=video_audio_kb,
                         parse_mode="MarkdownV2")
 
