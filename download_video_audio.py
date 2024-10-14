@@ -3,6 +3,7 @@ from mp3_metadata_setter import set_mp3_image
 import yt_dlp
 import asyncio
 import os
+import subprocess
 
 
 async def download_video(url):
@@ -37,6 +38,12 @@ async def download_audio(url):
     set_mp3_image(audio_file)
 
     return audio_file
+
+
+async def search(req):
+    result = subprocess.getoutput(f'yt-dlp "ytsearch1:{req}" --write-thumbnail --skip-download -o "temp" --no-simulate -O "%(channel)s - %(title)s"')
+    print(result)
+    return result
 
 
 if __name__ == '__main__':
